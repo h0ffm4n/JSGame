@@ -11,5 +11,10 @@ package JuegoJS;
  * @author sergi
  */
 class Carta {
-    
+    enum tipoVehiculo{blindado,ligero,aire};
+    tipoVehiculo esteVehiculo=tipoVehiculo.ligero;
+    public void ejemplo()
+    {
+    System.out.println(esteVehiculo.name());
+            }
 }
