@@ -12,8 +12,15 @@ package JuegoJS;
  */
 class Cuartel {
 
-    Cuartel(int CUARTELUSA) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Cuartel(int index) 
+    {
+        switch(index)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+        }
     }
     
 }

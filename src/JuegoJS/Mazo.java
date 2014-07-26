@@ -43,7 +43,7 @@ public ArrayList<Carta> getCartas()
     return mazo;
 }
 
-    Carta mazoRobarCarta(Mazo mazo) 
+    Carta mazoRobarCarta() 
     {   
        Carta carta=this.mazo.get(0);
        this.mazo.remove(carta);

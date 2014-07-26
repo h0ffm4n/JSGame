@@ -7,12 +7,14 @@
 package JuegoJS;
 
 import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.Scanner;
 
 /**
  *
  * @author sergi
  */
-class Jugador {
+class Jugador extends Thread{
     static int MAZOUSA, CUARTELUSA=0;
     static int MAZOINSURGENT, CUARTELINSURGENT=1;
     
@@ -22,8 +24,11 @@ class Jugador {
     Cuartel cuartel;//Cuartel
     ArrayList<Carta> cartasEnJuego=new ArrayList<>();
     ArrayList<Carta> cartasEnMano=new ArrayList<>();
+    private ArrayList<CartaBonificadores> bonificadores=new ArrayList<>();
+    private boolean endturn;
+    private String nombreJugador;
     
-    Jugador(int i) 
+    Jugador(int i,String nombreJugador) 
     {
         switch (i)
         {
@@ -38,23 +43,42 @@ class Jugador {
                 mazo.barajar();
                 break;
         }
+        this.nombreJugador=nombreJugador;
     }
 
-    Cuartel getCuartel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    Cuartel getCuartel() {return this.cuartel;}
 
-    Casilla[] getBonificador() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    ArrayList<CartaBonificadores> getBonificadores() 
+    {
+        return bonificadores;
     }
 
     ArrayList<Carta> getCartasMazo() {
        return(mazo.getCartas());
     }
     
-    public Carta jugadorRobarCarta()
+    public Carta jugadorRobarCarta(Mazo mazo)
     {
-        Carta carta=mazo.mazoRobarCarta(mazo);//Roba una carta de este mazo
+        Carta carta=mazo.mazoRobarCarta();//Roba una carta de este mazo
         return carta;
+    }
+    @Override
+    public void run()
+    {   //Implementacion en consola
+        System.out.println("turno de jugador"+this.nombreJugador);
+        while(true)
+        {
+            System.out.println("Introduzca accion:");
+            Scanner myScanner=new Scanner(System.in);
+            String comando=myScanner.next();
+            if(comando.equals("*"))
+            {
+                System.out.println("Fin de Turno");
+            }
+            else
+            {
+                System.out.println("Accion: "+comando);
+            }
+        }
     }
 }

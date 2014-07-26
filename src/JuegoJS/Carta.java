@@ -49,12 +49,7 @@ class Carta {
               break;
       }
       
-      enum tipoVehiculo{blindado,ligero,aire};
-    tipoVehiculo esteVehiculo=tipoVehiculo.ligero;
-    public void ejemplo()
-    {
-    System.out.println(esteVehiculo.name());
-    
+     
     
    
    

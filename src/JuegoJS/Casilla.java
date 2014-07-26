@@ -11,5 +11,15 @@ package JuegoJS;
  * @author sergi
  */
 class Casilla {
+    private tipoCasilla tipoCasilla;
+    enum tipoCasilla{carta,hueco,trampa,bonificador};
     
+    Casilla()
+    {
+        this.tipoCasilla=tipoCasilla.hueco;
+    }
+    tipoCasilla getTipoCasilla()
+    {
+        return this.tipoCasilla;
+    }
 }
