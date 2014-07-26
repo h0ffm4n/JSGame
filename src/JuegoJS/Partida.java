@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Partida {
     Jugador jugadorA,jugadorB;
-    Huecos[][] tableroCombate=new Huecos[5][4];
+    Casilla[][] tableroCombate=new Casilla[5][4];
     /*
     *   [CA][CA][CA][CA]
     *   [CA][CA][CA][CA]
@@ -33,8 +33,8 @@ public class Partida {
     *   
     *       [HQB]
     */
-    Huecos[] bonificadoresA=new Huecos[2];  
-    Huecos[] bonificadoresB=new Huecos[2];
+    Casilla[] bonificadoresA=new Casilla[2];  
+    Casilla[] bonificadoresB=new Casilla[2];
     /*
     *   [BA0][HQA][BA1]
     *    ____________
@@ -56,6 +56,11 @@ public class Partida {
         cuartelB=jugadorB.getCuartel();
         mazoA=jugadorA.getCartasMazo();
         mazoB=jugadorB.getCartasMazo();
+    }
+    
+    public Casilla[][] getTablero()
+    {
+        return tableroCombate;
     }
     
 }

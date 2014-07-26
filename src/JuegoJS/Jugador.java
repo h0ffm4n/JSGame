@@ -35,7 +35,7 @@ class Jugador {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    Huecos[] getBonificador() {
+    Casilla[] getBonificador() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

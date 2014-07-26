@@ -38,7 +38,7 @@ public void barajar()
 {
     Collections.shuffle(mazo);
 }
-public ArrayList<Carta> getCartasMazo()
+public ArrayList<Carta> getCartas()
 {
     return mazo;
 }
