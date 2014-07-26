@@ -10,6 +10,6 @@ package JuegoJS;
  *
  * @author sergi
  */
-class Huecos {
+class Casilla {
     
 }
