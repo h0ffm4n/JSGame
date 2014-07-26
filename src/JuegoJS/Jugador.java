@@ -13,20 +13,29 @@ import java.util.ArrayList;
  * @author sergi
  */
 class Jugador {
-    static int MAZOUSA=0;
-    static int MAZOINSURGENT=1;
+    static int MAZOUSA, CUARTELUSA=0;
+    static int MAZOINSURGENT, CUARTELINSURGENT=1;
     
-    Mazo mazo;//Mazo de Juego
+    Mazo mazo;//Mazo de Juego Inicial
+    
+    
+    Cuartel cuartel;//Cuartel
+    ArrayList<Carta> cartasEnJuego=new ArrayList<>();
+    ArrayList<Carta> cartasEnMano=new ArrayList<>();
     
     Jugador(int i) 
     {
         switch (i)
         {
             case 0:// Jugador USA
+                cuartel=new Cuartel(CUARTELUSA);
                 mazo=new Mazo(MAZOUSA);
+                mazo.barajar();
                 break;
             case 1://Jugador Insurgente
+                cuartel=new Cuartel(CUARTELINSURGENT);
                 mazo=new Mazo(MAZOINSURGENT);
+                mazo.barajar();
                 break;
         }
     }
@@ -43,4 +52,9 @@ class Jugador {
        return(mazo.getCartas());
     }
     
+    public Carta jugadorRobarCarta()
+    {
+        Carta carta=mazo.mazoRobarCarta(mazo);//Roba una carta de este mazo
+        return carta;
+    }
 }

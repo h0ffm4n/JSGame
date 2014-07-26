@@ -11,5 +11,9 @@ package JuegoJS;
  * @author sergi
  */
 class Cuartel {
+
+    Cuartel(int CUARTELUSA) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
