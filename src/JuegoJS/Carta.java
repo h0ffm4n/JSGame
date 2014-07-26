@@ -11,5 +11,29 @@ package JuegoJS;
  * @author sergi
  */
 class Carta {
+   
+    int id;
+    String Descripcion;
+    int Dmg;
+    int Def;
+     
+   Carta(int i){
+      switch(i)
+      {
+          case 0:
+              this.id=0;
+              this.Descripcion="soldado usa";
+              break;
+              
+          case 1: 
+              this.id=1;
+              this.Descripcion=""
+      }
+       
+   }
+    
+    
+   
+   
     
 }
