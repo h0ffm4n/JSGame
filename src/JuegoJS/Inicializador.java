@@ -13,22 +13,40 @@ import java.util.ArrayList;
  * @author sergi
  */
 public class Inicializador {
+    static boolean test=true;
     static int USA=0;
     static int INSURGENT=1;
     static Jugador jugadorA,jugadorB;
     static Partida enJuego;
     public static void main(String[] argumentos)
-    {
+    {   
+        if(test)
+        {
+            System.out.println("Jugadores creandose....");
+        }
         jugadorA=new Jugador(USA,"USA");
+        if(test)
+        {
+            System.out.println("Jugadores USA creado");
+        }
         jugadorB=new Jugador(INSURGENT,"INSURGENTE");
+        if(test)
+        {
+            System.out.println("Jugadores creados");
+        }
         enJuego=new Partida(jugadorA, jugadorB);
+        if(test)
+        {
+            System.out.println("Partida creada");
+        }
         empezarPartida(enJuego);
     }
 
     private static void empezarPartida(Partida enJuego) 
     {   
-        int random = (int)(Math.random()*2+1);
+        int random = (int)(Math.random()*2);// Devuelve un numero entre 0 y 1 se usara para el numero de jugador
         Turno t=new Turno(random);
+        t.start();
     }
     public static ArrayList<Jugador> getJugadores()
     {

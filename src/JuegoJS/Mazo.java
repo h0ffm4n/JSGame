@@ -14,21 +14,23 @@ import java.util.Collections;
  * @author sergi
  */
 class Mazo {
-ArrayList<Carta> mazo=new ArrayList<>();
+ArrayList<Carta> lasCartasDelMazo=new ArrayList<>();
     Mazo(int i) {
     
         switch(i)
         {
             case 0://Mazo USA
-                for(int k=0;i<3;k++)
-                {
-                    mazo.add(new Carta(k));
+                for(int k=0;k<3;k++)
+                {   
+                    System.out.println("Creando carta "+k);
+                    lasCartasDelMazo.add(new Carta(k));
+                    System.out.println("Creada carta "+k);
                 }
                 break;
             case 1://Mazo INSURGENT
                 for(int k=3;k<6;k++)
                 {
-                    mazo.add(new Carta(k));
+                    lasCartasDelMazo.add(new Carta(k));
                 }
                 break;
         }
@@ -36,17 +38,17 @@ ArrayList<Carta> mazo=new ArrayList<>();
     }
 public void barajar()
 {
-    Collections.shuffle(mazo);
+    Collections.shuffle(lasCartasDelMazo);
 }
 public ArrayList<Carta> getCartas()
 {
-    return mazo;
+    return lasCartasDelMazo;
 }
 
     Carta mazoRobarCarta() 
     {   
-       Carta carta=this.mazo.get(0);
-       this.mazo.remove(carta);
+       Carta carta=this.lasCartasDelMazo.get(0);
+       this.lasCartasDelMazo.remove(carta);
        return carta;
     }
     

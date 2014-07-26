@@ -17,7 +17,7 @@ class Turno extends Thread{
     Jugador jugadorEnTurno;
     int turnoInicial;
     private boolean finDePartida;
-    Turno(int turnoInicial)
+    Turno(int turnoInicial)// le puede llegar 0 o 1 del random
     {
         switch(turnoInicial)
         {
@@ -30,7 +30,7 @@ class Turno extends Thread{
         }
         this.turnoInicial=turnoInicial;
         this.finDePartida=false;
-        this.start();
+        
     }
     @Override
     public void run()
@@ -38,8 +38,10 @@ class Turno extends Thread{
         while(!finDePartida)
         {
         jugadorEnTurno.start();
+        
         try {
             jugadorEnTurno.join();
+            
         } catch (InterruptedException ex) {
             Logger.getLogger(Turno.class.getName()).log(Level.SEVERE, null, ex);
         }

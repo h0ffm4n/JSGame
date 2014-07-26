@@ -9,6 +9,8 @@ package JuegoJS;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +19,7 @@ import java.util.Scanner;
 class Jugador extends Thread{
     static int MAZOUSA, CUARTELUSA=0;
     static int MAZOINSURGENT, CUARTELINSURGENT=1;
-    
+    static boolean test=true;
     Mazo mazo;//Mazo de Juego Inicial
     
     
@@ -27,15 +29,32 @@ class Jugador extends Thread{
     private ArrayList<CartaBonificadores> bonificadores=new ArrayList<>();
     private boolean endturn;
     private String nombreJugador;
+    private boolean stopCondition;
     
     Jugador(int i,String nombreJugador) 
     {
         switch (i)
         {
             case 0:// Jugador USA
+                 if(test)
+            {
+                System.out.println("Cuartel creandose....");
+            }
                 cuartel=new Cuartel(CUARTELUSA);
+                 if(test)
+            {
+                System.out.println("Cuartel creado");
+            }
+            
+                        if(test)
+            {
+                System.out.println("Mazo creandose....");
+            }
                 mazo=new Mazo(MAZOUSA);
                 mazo.barajar();
+            {
+                System.out.println("Mazo creado");
+            }
                 break;
             case 1://Jugador Insurgente
                 cuartel=new Cuartel(CUARTELINSURGENT);
@@ -74,11 +93,28 @@ class Jugador extends Thread{
             if(comando.equals("*"))
             {
                 System.out.println("Fin de Turno");
+                try {stopCondition=true;
+                    esperar();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else
             {
                 System.out.println("Accion: "+comando);
             }
         }
+    }
+    public void esperar() throws InterruptedException
+    {
+        while(stopCondition)
+        {
+            wait();
+        }
+    }
+    public void despertar()
+    {   
+        stopCondition=false;
+        notify();
     }
 }
