@@ -6,14 +6,38 @@
 
 package JuegoJS;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author sergi
  */
 class Mazo {
-
-    Mazo(int MAZOUSA) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+ArrayList<Carta> mazo=new ArrayList<>();
+    Mazo(int i) {
+    
+        switch(i)
+        {
+            case 0://Mazo USA
+                for(int k=0;i<3;k++)
+                {
+                    mazo.add(new Carta(k));
+                }
+                break;
+            case 1://Mazo INSURGENT
+                for(int k=3;k<6;k++)
+                {
+                    mazo.add(new Carta(k));
+                }
+                break;
+        }
+    
     }
+public void barajar()
+{
+    Collections.shuffle(mazo);
+}
+
     
 }
