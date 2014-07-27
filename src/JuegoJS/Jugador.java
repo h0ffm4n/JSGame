@@ -20,6 +20,8 @@ class Jugador extends Thread{
     static int MAZOUSA, CUARTELUSA=0;
     static int MAZOINSURGENT, CUARTELINSURGENT=1;
     static boolean test=true;
+   
+    
     Mazo mazo;//Mazo de Juego Inicial
     
     
@@ -84,26 +86,23 @@ class Jugador extends Thread{
     @Override
     public void run()
     {   //Implementacion en consola
-        System.out.println("turno de jugador"+this.nombreJugador);
         while(true)
         {
-            System.out.println("Introduzca accion:");
+            System.out.println("Turno jugador"+this.nombreJugador);
+            System.out.println("Introduzca accion");
             Scanner myScanner=new Scanner(System.in);
             String comando=myScanner.next();
+            System.out.println("Accion");
             if(comando.equals("*"))
             {
-                System.out.println("Fin de Turno");
-                try {stopCondition=true;
-                    esperar();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                break;
             }
-            else
+        
+            else 
             {
-                System.out.println("Accion: "+comando);
+            System.out.println(comando);
             }
-        }
+    }
     }
     public void esperar() throws InterruptedException
     {

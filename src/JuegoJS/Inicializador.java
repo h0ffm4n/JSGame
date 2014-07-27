@@ -45,8 +45,8 @@ public class Inicializador {
     private static void empezarPartida(Partida enJuego) 
     {   
         int random = (int)(Math.random()*2);// Devuelve un numero entre 0 y 1 se usara para el numero de jugador
-        Turno t=new Turno(random);
-        t.start();
+        getJugadores().get(random).start();
+        
     }
     public static ArrayList<Jugador> getJugadores()
     {
