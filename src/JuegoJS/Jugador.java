@@ -31,10 +31,9 @@ class Jugador extends Thread{
     ArrayList<Carta> cartasEnJuego=new ArrayList<>();
     ArrayList<Carta> cartasEnMano=new ArrayList<>();
     private ArrayList<CartaBonificadores> bonificadores=new ArrayList<>();
-    private boolean endturn;
+ 
     private String nombreJugador;
-    private boolean stopCondition;
-    
+  
     Jugador(int i,String nombreJugador) 
     {
         switch (i)
@@ -106,8 +105,8 @@ class Jugador extends Thread{
                 
                                    while(true)
                                    {
-                                        System.out.println("Turno jugador"+this.nombreJugador);
-                           System.out.println("Introduzca accion");
+                                        System.out.println("Turno jugador: "+this.nombreJugador);
+                           System.out.println("Introduzca accion: ");
 
                            Scanner myScanner=new Scanner(System.in);
                            String comando=myScanner.next();
@@ -116,17 +115,12 @@ class Jugador extends Thread{
                                break;
                            }
 
-                           System.out.println("Accion"+comando);
+                           System.out.println("Accion: "+comando);
                            
                                    }
                     Turno.despertarOtroThread(this);
                     Turno.cambiarTurno();
-          
-               
-            
-              
                  
-         
     }
     }
    public void esperar() throws InterruptedException

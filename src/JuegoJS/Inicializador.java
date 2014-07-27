@@ -50,21 +50,21 @@ public class Inicializador {
         Jugador jugadorA = new Jugador(0,"USA");
         Turno.registrarJugador(jugadorA);
         
-        Jugador jugadorB = new Jugador(1,"INSURGENT");
+        Jugador jugadorB = new Jugador(1,"INSURGENTE");
         Turno.registrarJugador(jugadorB);
         
         int random = (int)(Math.random()*2);// Devuelve un numero entre 0 y 1 se usara para el numero de jugador
-        //getJugadores().get(random).cambiarTurno();
-        jugadorA.cambiarTurno();
+        //(Inicializador.getJugadores().get(random)).cambiarTurno();
+        switch(random)
+        {
+            case 0:jugadorA.cambiarTurno();
+                break;
+            case 1:jugadorB.cambiarTurno();
+                break;
+        }
         jugadorA.start();
         jugadorB.start();
         
     }
-    public static ArrayList<Jugador> getJugadores()
-    {
-        ArrayList<Jugador> jugadores= new ArrayList<Jugador>();
-        jugadores.add(jugadorA);
-        jugadores.add(jugadorB);
-        return jugadores;
-    }
+   
 }
