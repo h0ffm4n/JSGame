@@ -16,7 +16,7 @@ public class Turno {
 
 
 public  static boolean turnoUSA = true ;
-
+public static ArrayList<Jugador> jugadores=new ArrayList<>();
     static synchronized void cambiarturnoUSA(boolean b) 
     {
         turnoUSA=b; //To change body of generated methods, choose Tools | Templates.
