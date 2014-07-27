@@ -53,7 +53,7 @@ public class Inicializador {
         Turno.registrarJugador(jugadorA);
         
         INSURGENT i = new INSURGENT(1,"INSURGENT");
-        Inicializador.u=u;
+        Inicializador.u=jugadorA;
         Inicializador.i=i;
         u.start();
         i.start();
