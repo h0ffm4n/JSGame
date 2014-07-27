@@ -90,14 +90,14 @@ class INSURGENT extends Thread{
      while(true)//evita que muera el thread
      {
          synchronized(this) 
-                            {
-            while(GlobalClass.turnoUSA)
+         {
+            while(Turno.turnoUSA)
             {   try {
-                this.wait();
+                esperar();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(INSURGENT.class.getName()).log(Level.SEVERE, null, ex);
                 }
-}
+            }
                             }
          while(true)
          {
@@ -115,7 +115,7 @@ class INSURGENT extends Thread{
             
             
             
-            GlobalClass.cambiarturnoUSA(true);
+            Turno.cambiarturnoUSA(true);
             Inicializador.u.despertar();
             
             
@@ -124,10 +124,11 @@ class INSURGENT extends Thread{
     }
     public void esperar() throws InterruptedException
     {
-        while(stopCondition)
-        {
-            wait();
-        }
+        try {
+                this.wait();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(INSURGENT.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }
     public void despertar()
     {   
