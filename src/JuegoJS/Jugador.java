@@ -19,7 +19,9 @@ import java.util.logging.Logger;
 class Jugador extends Thread{
     static int MAZOUSA, CUARTELUSA=0;
     static int MAZOINSURGENT, CUARTELINSURGENT=1;
-    static boolean test=true;
+    boolean test=true;
+    boolean turno=false;
+    
    
     
     Mazo mazo;//Mazo de Juego Inicial
@@ -91,10 +93,10 @@ class Jugador extends Thread{
      {
                 synchronized(this) 
                                    {
-                       while(!Turno.turnoUSA)
+                       while(turno)
                        {
                            try {
-                               this.wait();
+                               esperar();
                            } catch (InterruptedException ex) {
                                Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
                            }
@@ -117,8 +119,8 @@ class Jugador extends Thread{
                            System.out.println("Accion"+comando);
                            
                                    }
-                    Inicializador.i.despertar();
-                    Turno.cambiarturnoUSA(false);
+                    Turno.despertarOtroThread(this);
+                    Turno.cambiarTurno();
           
                
             
@@ -127,12 +129,11 @@ class Jugador extends Thread{
          
     }
     }
-    public void esperar() throws InterruptedException
+   public void esperar() throws InterruptedException
     {
-        while(stopCondition)
-        {
-            wait();
-        }
+        
+                this.wait();
+                
     }
     public void despertar()
     {   
@@ -140,5 +141,16 @@ class Jugador extends Thread{
         {
             notifyAll();
         }
+    }
+
+    void cambiarTurno() {
+    if(turno)
+    {
+        turno=false;
+    }
+    else
+    {
+        turno=true;
+    }
     }
 }

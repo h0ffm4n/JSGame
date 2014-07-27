@@ -18,8 +18,7 @@ public class Inicializador {
     static int INSURGENT=1;
     static Jugador jugadorA,jugadorB;
     static Partida enJuego;
-    public static Jugador u;
-    public static INSURGENT i;
+   
     public static void main(String[] argumentos)
     {   
         if(test)
@@ -46,17 +45,19 @@ public class Inicializador {
 
     private static void empezarPartida(Partida enJuego) 
     {   
-        int random = (int)(Math.random()*2);// Devuelve un numero entre 0 y 1 se usara para el numero de jugador
         
         
         Jugador jugadorA = new Jugador(0,"USA");
         Turno.registrarJugador(jugadorA);
         
-        INSURGENT i = new INSURGENT(1,"INSURGENT");
-        Inicializador.u=jugadorA;
-        Inicializador.i=i;
-        u.start();
-        i.start();
+        Jugador jugadorB = new Jugador(1,"INSURGENT");
+        Turno.registrarJugador(jugadorB);
+        
+        int random = (int)(Math.random()*2);// Devuelve un numero entre 0 y 1 se usara para el numero de jugador
+        //getJugadores().get(random).cambiarTurno();
+        jugadorA.cambiarTurno();
+        jugadorA.start();
+        jugadorB.start();
         
     }
     public static ArrayList<Jugador> getJugadores()

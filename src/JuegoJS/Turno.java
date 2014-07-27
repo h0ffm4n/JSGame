@@ -17,13 +17,33 @@ public class Turno {
 
 public  static boolean turnoUSA = true ;
 public static ArrayList<Jugador> jugadores=new ArrayList<>();
-    static synchronized void cambiarturnoUSA(boolean b) 
-    {
-        turnoUSA=b; //To change body of generated methods, choose Tools | Templates.
+  
+
+    static void registrarJugador(Jugador jugador) {
+    jugadores.add(jugador);
     }
 
-    static void registrarJugador(Jugador jugadorA) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static synchronized void cambiarTurno() {
+    for(int i=0;i<jugadores.size();i++)
+    {
+        Jugador jugador=jugadores.get(i);
+        jugador.cambiarTurno();
+    }
+    }
+
+    static void despertarOtroThread(Jugador j) {
+        for(int i=0;i<jugadores.size();i++)
+        {
+            Jugador jugador=jugadores.get(i);
+            if(j.equals(jugador))
+            {
+                //Do nothing
+            }
+            else
+            {
+                jugador.despertar();
+            }
+        }
     }
 
     
