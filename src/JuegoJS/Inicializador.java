@@ -16,20 +16,22 @@ public class Inicializador {
     static boolean test=true;
     static int USA=0;
     static int INSURGENT=1;
-    static Jugador jugadorA,jugadorB;
+    static USA jugadorA,jugadorB;
     static Partida enJuego;
+    public static USA u;
+    public static INSURGENT i;
     public static void main(String[] argumentos)
     {   
         if(test)
         {
             System.out.println("Jugadores creandose....");
         }
-        jugadorA=new Jugador(USA,"USA");
+        jugadorA=new USA(USA,"USA");
         if(test)
         {
             System.out.println("Jugadores USA creado");
         }
-        jugadorB=new Jugador(INSURGENT,"INSURGENTE");
+        jugadorB=new USA(INSURGENT,"INSURGENTE");
         if(test)
         {
             System.out.println("Jugadores creados");
@@ -45,12 +47,19 @@ public class Inicializador {
     private static void empezarPartida(Partida enJuego) 
     {   
         int random = (int)(Math.random()*2);// Devuelve un numero entre 0 y 1 se usara para el numero de jugador
-        getJugadores().get(random).start();
+        
+        
+        USA u = new USA(0,"USA");
+        INSURGENT i = new INSURGENT(1,"INSURGENT");
+        Inicializador.u=u;
+        Inicializador.i=i;
+        u.start();
+        i.start();
         
     }
-    public static ArrayList<Jugador> getJugadores()
+    public static ArrayList<USA> getJugadores()
     {
-        ArrayList<Jugador> jugadores= new ArrayList<Jugador>();
+        ArrayList<USA> jugadores= new ArrayList<USA>();
         jugadores.add(jugadorA);
         jugadores.add(jugadorB);
         return jugadores;

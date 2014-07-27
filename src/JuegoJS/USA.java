@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author sergi
  */
-class Jugador extends Thread{
+class USA extends Thread{
     static int MAZOUSA, CUARTELUSA=0;
     static int MAZOINSURGENT, CUARTELINSURGENT=1;
     static boolean test=true;
@@ -33,7 +33,7 @@ class Jugador extends Thread{
     private String nombreJugador;
     private boolean stopCondition;
     
-    Jugador(int i,String nombreJugador) 
+    USA(int i,String nombreJugador) 
     {
         switch (i)
         {
@@ -86,22 +86,45 @@ class Jugador extends Thread{
     @Override
     public void run()
     {   //Implementacion en consola
-        while(true)
-        {
-            System.out.println("Turno jugador"+this.nombreJugador);
-            System.out.println("Introduzca accion");
-            Scanner myScanner=new Scanner(System.in);
-            String comando=myScanner.next();
-            System.out.println("Accion");
-            if(comando.equals("*"))
-            {
-                break;
-            }
         
-            else 
-            {
-            System.out.println(comando);
-            }
+     while(true)//evita que muera el thread
+     {
+                synchronized(this) 
+                                   {
+                       while(!GlobalClass.turnoUSA)
+                       {
+                           try {
+                               this.wait();
+                           } catch (InterruptedException ex) {
+                               Logger.getLogger(USA.class.getName()).log(Level.SEVERE, null, ex);
+                           }
+                       }
+
+                                   }     
+                
+                                   while(true)
+                                   {
+                                        System.out.println("Turno jugador"+this.nombreJugador);
+                           System.out.println("Introduzca accion");
+
+                           Scanner myScanner=new Scanner(System.in);
+                           String comando=myScanner.next();
+                           if(comando.equals("*"))
+                           {
+                               break;
+                           }
+
+                           System.out.println("Accion"+comando);
+                           
+                                   }
+                    Inicializador.i.despertar();
+                    GlobalClass.cambiarturnoUSA(false);
+          
+               
+            
+              
+                 
+         
     }
     }
     public void esperar() throws InterruptedException
@@ -113,7 +136,9 @@ class Jugador extends Thread{
     }
     public void despertar()
     {   
-        stopCondition=false;
-        notify();
+        synchronized (this)
+        {
+            notifyAll();
+        }
     }
 }

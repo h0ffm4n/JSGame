@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author sergi
  */
 public class Partida {
-    Jugador jugadorA,jugadorB;
+    USA jugadorA,jugadorB;
     Casilla[][] tableroCombate=new Casilla[5][4];
     /*
     *   [CA][CA][CA][CA]
@@ -48,7 +48,7 @@ public class Partida {
     ArrayList<Carta> mazoA=new ArrayList<>();
     ArrayList<Carta> mazoB=new ArrayList<>();
     
-    Partida(Jugador jugadorA,Jugador jugadorB)
+    Partida(USA jugadorA,USA jugadorB)
     {
         this.jugadorA=jugadorA;
         this.jugadorB=jugadorB;
