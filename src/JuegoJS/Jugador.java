@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author sergi
  */
-class USA extends Thread{
+class Jugador extends Thread{
     static int MAZOUSA, CUARTELUSA=0;
     static int MAZOINSURGENT, CUARTELINSURGENT=1;
     static boolean test=true;
@@ -33,7 +33,7 @@ class USA extends Thread{
     private String nombreJugador;
     private boolean stopCondition;
     
-    USA(int i,String nombreJugador) 
+    Jugador(int i,String nombreJugador) 
     {
         switch (i)
         {
@@ -91,12 +91,12 @@ class USA extends Thread{
      {
                 synchronized(this) 
                                    {
-                       while(!GlobalClass.turnoUSA)
+                       while(!Turno.turnoUSA)
                        {
                            try {
                                this.wait();
                            } catch (InterruptedException ex) {
-                               Logger.getLogger(USA.class.getName()).log(Level.SEVERE, null, ex);
+                               Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
                            }
                        }
 
@@ -118,7 +118,7 @@ class USA extends Thread{
                            
                                    }
                     Inicializador.i.despertar();
-                    GlobalClass.cambiarturnoUSA(false);
+                    Turno.cambiarturnoUSA(false);
           
                
             

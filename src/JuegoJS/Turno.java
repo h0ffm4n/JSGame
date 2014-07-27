@@ -12,13 +12,18 @@ import java.util.ArrayList;
  *
  * @author sergi
  */
-public class GlobalClass {
+public class Turno {
 
 
 public  static boolean turnoUSA = true ;
 
-    static synchronized void cambiarturnoUSA(boolean b) {
+    static synchronized void cambiarturnoUSA(boolean b) 
+    {
         turnoUSA=b; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    static void registrarJugador(Jugador jugadorA) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

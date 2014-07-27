@@ -98,7 +98,7 @@ class INSURGENT extends Thread{
                     Logger.getLogger(INSURGENT.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-                            }
+          }
          while(true)
          {
              System.out.println("Turno jugador"+this.nombreJugador);
