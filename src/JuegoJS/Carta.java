@@ -17,6 +17,7 @@ class Carta {
     int DmgAire,DmgLigero,DmgBlindado;
     int Def;
     int vida;
+    int accionesRestantes;
     enum TipoCarta{blindado,ligero,aire};
     TipoCarta estaCarta;
 

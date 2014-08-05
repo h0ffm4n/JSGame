@@ -14,8 +14,15 @@ import java.util.Collections;
  * @author sergi
  */
 class Mazo {
+String nombreMazo="";    
 ArrayList<Carta> lasCartasDelMazo=new ArrayList<>();
-    Mazo(int i) {
+    
+Mazo (String nombreMazo)
+{
+    this.nombreMazo=nombreMazo;
+    XMLParser().recuperarMazo(this);
+}
+Mazo(int i) {
     
         switch(i)
         {
@@ -38,18 +45,22 @@ ArrayList<Carta> lasCartasDelMazo=new ArrayList<>();
     }
 public void barajar()
 {
-    Collections.shuffle(lasCartasDelMazo);
+    Collections.shuffle(lasCartasDelMazo);//Este método solo se llama al comienzo de la partida
 }
 public ArrayList<Carta> getCartas()
 {
     return lasCartasDelMazo;
 }
 
-    Carta mazoRobarCarta() 
+    Carta mazoRobarCarta()//Esto es interesante, ya que el jugador puede tener el mazo y que sea este el restante 
     {   
        Carta carta=this.lasCartasDelMazo.get(0);
        this.lasCartasDelMazo.remove(carta);
        return carta;
+    }
+
+    String getNombre() {
+    return this.nombreMazo;
     }
     
 }

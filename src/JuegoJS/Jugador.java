@@ -36,7 +36,7 @@ class Jugador extends Thread{
   
     Jugador(int i,String nombreJugador) 
     {
-        switch (i)
+        switch (i)// por ahora los dos jugadores se crean en base a un indice, posteriormente sera un login
         {
             case 0:// Jugador USA
                  if(test)
@@ -53,12 +53,15 @@ class Jugador extends Thread{
             {
                 System.out.println("Mazo creandose....");
             }
-                mazo=new Mazo(MAZOUSA);
+                mazo=new Mazo(MAZOUSA);//inicializa su mazo, aqui debe ir un link al parser de XML
+                                       //es interesante observar que un jugador podría tener varios mazos
                 mazo.barajar();
             {
                 System.out.println("Mazo creado");
             }
                 break;
+                
+                
             case 1://Jugador Insurgente
                 cuartel=new Cuartel(CUARTELINSURGENT);
                 mazo=new Mazo(MAZOINSURGENT);
