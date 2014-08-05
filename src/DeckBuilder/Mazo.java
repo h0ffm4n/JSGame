@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package JuegoJS;
+package DeckBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,15 +13,11 @@ import java.util.Collections;
  *
  * @author sergi
  */
-class Mazo {
+public class Mazo {
 String nombreMazo="";    
 ArrayList<Carta> lasCartasDelMazo=new ArrayList<>();
     
-Mazo (String nombreMazo)
-{
-    this.nombreMazo=nombreMazo;
-    //XMLParser().recuperarMazo(this);
-}
+
 Mazo(int i) {
     
         switch(i)

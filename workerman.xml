@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_25" class="java.beans.XMLDecoder">
+ <object class="DeckBuilder.Worker" id="Worker0">
+  <void class="DeckBuilder.Worker" method="getField">
+   <string>username</string>
+   <void method="set">
+    <object idref="Worker0"/>
+    <string>pepitouser</string>
+   </void>
+  </void>
+  <void class="DeckBuilder.Worker" method="getField">
+   <string>password</string>
+   <void method="set">
+    <object idref="Worker0"/>
+    <string>pepitopass</string>
+   </void>
+  </void>
+  <void class="DeckBuilder.Worker" method="getField">
+   <string>name</string>
+   <void method="set">
+    <object idref="Worker0"/>
+    <string>Pepito Pimentón</string>
+   </void>
+  </void>
+  <void class="DeckBuilder.Worker" method="getField">
+   <string>age</string>
+   <void method="set">
+    <object idref="Worker0"/>
+    <int>31</int>
+   </void>
+  </void>
+  <void class="DeckBuilder.Worker" method="getField">
+   <string>birthDate</string>
+   <void method="set">
+    <object idref="Worker0"/>
+    <object class="java.util.Date">
+     <long>1110754800000</long>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

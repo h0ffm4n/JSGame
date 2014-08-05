@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package JuegoJS;
+package DeckBuilder;
 
 import java.io.Serializable;
 

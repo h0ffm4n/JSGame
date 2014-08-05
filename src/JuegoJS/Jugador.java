@@ -6,6 +6,15 @@
 
 package JuegoJS;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.Scanner;
@@ -31,7 +40,7 @@ class Jugador extends Thread{
     ArrayList<Carta> cartasEnJuego=new ArrayList<>();
     ArrayList<Carta> cartasEnMano=new ArrayList<>();
     private ArrayList<CartaBonificadores> bonificadores=new ArrayList<>();
- 
+    private int indexJugador;
     private String nombreJugador;
   
     Jugador(int i,String nombreJugador) 
@@ -68,6 +77,7 @@ class Jugador extends Thread{
                 mazo.barajar();
                 break;
         }
+        this.indexJugador=i;
         this.nombreJugador=nombreJugador;
     }
 
@@ -89,36 +99,79 @@ class Jugador extends Thread{
     }
     @Override
     public void run()
-    {   //Implementacion en consola
+    {   
+        int puerto=5555+indexJugador;
+        DataInputStream entradaDatos = null;
+        PrintStream salidaDatos = null;
         
-     while(true)//evita que muera el thread
-     {
+        ServerSocket socket=null;
+        //Esperamos a que se conecte un cliente
+        try {
+        socket = new ServerSocket (puerto);
+        Socket cliente = socket.accept();
+        
+        //Inicializamos flujos de lectura y escritura
+        InputStream entrada = cliente.getInputStream();
+        OutputStream salida = cliente.getOutputStream();
+        
+        
+        //El tipo de datos a aceptar son enteros, o String, o etc,etc
+        entradaDatos = new DataInputStream (entrada);
+        salidaDatos = new PrintStream (salida);
+        
+        //Say helo to player
+        salidaDatos.println("Hola jugador: "+indexJugador+"\n\r");
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        while(true)//evita que muera el thread
+        {   
+            if(salidaDatos!=null)
+            {
+                
+                salidaDatos.println("turno jugador: "+indexJugador);
+            }
                 synchronized(this) 
-                                   {
+                                   
+                {
                        while(turno)
                        {
-                           try {
+                           try 
+                           {
                                esperar();
-                           } catch (InterruptedException ex) {
+                           } 
+                           catch (InterruptedException ex) 
+                           {
                                Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
                            }
                        }
 
-                                   }     
+                }     
                 
                                    while(true)
-                                   {
+                                   {    salidaDatos.println("\033[2J"+"\033[2A");
+                                       salidaDatos.println("Es tu turno: \r");
                                         System.out.println("Turno jugador: "+this.nombreJugador);
-                           System.out.println("Introduzca accion: ");
+                                        System.out.println("Introduzca accion: ");
+                                        try 
+                                        {
+                                            String lectura = entradaDatos.readLine();
+                                            if(lectura.equals("*"))
+                                            {
+                                                break;
+                                            }
+                                            System.out.println("Accion: "+lectura);
+                                            
+                                        } 
+                                            catch (IOException ex) 
+                                        {
+                                            Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                        
+                                       
 
-                           Scanner myScanner=new Scanner(System.in);
-                           String comando=myScanner.next();
-                           if(comando.equals("*"))
-                           {
-                               break;
-                           }
-
-                           System.out.println("Accion: "+comando);
+                                        
                            
                                    }
                     Turno.despertarOtroThread(this);
