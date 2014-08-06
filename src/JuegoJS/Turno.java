@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Turno {
 
 
-public  static boolean turnoUSA = true ;
+public  static boolean turnoA = true ;
 public static ArrayList<Jugador> jugadores=new ArrayList<>();
   
 
@@ -44,6 +44,10 @@ public static ArrayList<Jugador> jugadores=new ArrayList<>();
                 jugador.despertar();
             }
         }
+    }
+
+    static int obtenerJugadorEnTurno() {
+    return (turnoA) ? 1:0;
     }
 
     

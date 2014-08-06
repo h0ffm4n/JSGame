@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author sergi
  */
 public class Partida {
-    Jugador jugadorA,jugadorB;
+    public Jugador jugadorA,jugadorB;
     Casilla[][] tableroCombate=new Casilla[5][4];
     /*
     *   [CA][CA][CA][CA]
@@ -63,5 +63,16 @@ public class Partida {
         return tableroCombate;
     }
     
+    public Jugador obtenerOtroJugador(Jugador j)
+    {
+        if(jugadorA.equals(j))
+        {
+            return jugadorB;
+        }
+        else
+        {
+            return jugadorA;
+        }
+    }
   
 }

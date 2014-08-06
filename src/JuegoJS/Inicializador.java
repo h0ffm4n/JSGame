@@ -17,7 +17,7 @@ public class Inicializador {
     static int USA=0;
     static int INSURGENT=1;
     static Jugador jugadorA,jugadorB;
-    static Partida enJuego;
+    public static Partida enJuego;
    
     public static void main(String[] argumentos)
     {   
@@ -47,10 +47,10 @@ public class Inicializador {
     {   
         
         
-        Jugador jugadorA = new Jugador(0,"USA");
+        
         Turno.registrarJugador(jugadorA);
         
-        Jugador jugadorB = new Jugador(1,"INSURGENTE");
+        
         Turno.registrarJugador(jugadorB);
         
         int random = (int)(Math.random()*2);// Devuelve un numero entre 0 y 1 se usara para el numero de jugador
@@ -62,6 +62,8 @@ public class Inicializador {
             case 1:jugadorB.cambiarTurno();
                 break;
         }
+        
+        //Esto es lo que inicia en si la interaccion de los jugadores
         jugadorA.start();
         jugadorB.start();
         

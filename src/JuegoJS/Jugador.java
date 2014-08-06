@@ -7,17 +7,13 @@
 package JuegoJS;
 
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +26,8 @@ class Jugador extends Thread{
     static int MAZOINSURGENT, CUARTELINSURGENT=1;
     boolean test=true;
     boolean turno=false;
-    
+    DataInputStream entradaDatos = null;
+    PrintStream salidaDatos = null;
    
     
     Mazo mazo;//Mazo de Juego Inicial
@@ -42,6 +39,7 @@ class Jugador extends Thread{
     private ArrayList<CartaBonificadores> bonificadores=new ArrayList<>();
     private int indexJugador;
     private String nombreJugador;
+    public String mensajePendiente="";
   
     Jugador(int i,String nombreJugador) 
     {
@@ -101,8 +99,7 @@ class Jugador extends Thread{
     public void run()
     {   
         int puerto=5555+indexJugador;
-        DataInputStream entradaDatos = null;
-        PrintStream salidaDatos = null;
+       
         
         ServerSocket socket=null;
         //Esperamos a que se conecte un cliente
@@ -130,28 +127,59 @@ class Jugador extends Thread{
             if(salidaDatos!=null)
             {
                 
-                salidaDatos.println("turno jugador: "+indexJugador);
+                salidaDatos.println("turno jugador: "+Turno.obtenerJugadorEnTurno());
             }
                 synchronized(this) 
                                    
                 {
                        while(turno)
-                       {
+                       {    
                            try 
-                           {
-                               esperar();
-                           } 
-                           catch (InterruptedException ex) 
-                           {
+                           {   
+                               if (entradaDatos.available()>0) 
+                                {
+                                     // Esta asignacion temporal vacia el buffer de entrada, debera comprobar acciones validas
+                                     // fuera de turno
+                                     String lectura = entradaDatos.readLine();
+                                     salidaDatos.println("No es su turno aun");
+                                     
+                                }
+                               if (this.mensajePendiente.length()>0)
+                               {    
+                                   
+                                   salidaDatos.println(mensajePendiente);
+                                   this.mensajePendiente="";
+                                   
+                               }
+                              
+                               } catch (IOException ex) {
                                Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
                            }
+                           
+                               //El siguiente segmento era el encargado de dormir el Thread, ahora lo que hacemos es contestar
+                               /*try
+                               {
+                               esperar();
+                               }
+                               catch (InterruptedException ex)
+                               {
+                               Logger.getLogger(Jugador.class.getName()).log(Level.SEVERE, null, ex);
+                               }*/
+                           
                        }
 
                 }     
                 
                                    while(true)
-                                   {    salidaDatos.println("\033[2J"+"\033[2A");
-                                       salidaDatos.println("Es tu turno: \r");
+                                   {    
+                                        
+                                        if (mensajePendiente.length()>0)
+                                        {    
+
+                                            salidaDatos.println(mensajePendiente);
+                                            this.mensajePendiente="";
+                                        }
+                                        salidaDatos.println("Es tu turno: \r");
                                         System.out.println("Turno jugador: "+this.nombreJugador);
                                         System.out.println("Introduzca accion: ");
                                         try 
@@ -174,7 +202,18 @@ class Jugador extends Thread{
                                         
                            
                                    }
-                    Turno.despertarOtroThread(this);
+                      
+                    //Este metodo dormía el Thread, esto ya no sera necesario               
+                    /*
+                     *Turno.despertarOtroThread(this);
+                     */
+                    
+                    synchronized (this)
+                            {
+                                //No estory especialmente seguro de que esto evite un RC debido al otro thread
+                                (Inicializador.enJuego.obtenerOtroJugador(this)).notificacionAsincrona("Fin de Turno Jugador "+this.indexJugador);
+                            }
+                    
                     Turno.cambiarTurno();
                  
     }
@@ -193,14 +232,27 @@ class Jugador extends Thread{
         }
     }
 
-    void cambiarTurno() {
-    if(turno)
+    void cambiarTurno() 
     {
-        turno=false;
+        if(turno)
+        {
+            turno=false;
+        }
+        else
+        {
+            turno=true;
+        }
     }
-    else
+
+    private void limpiarTerminalANSII(PrintStream salidaDatos) {
+    salidaDatos.println("\033[2J"+"\033[2A");
+    }
+    
+    public void notificacionAsincrona(String cadena)
     {
-        turno=true;
-    }
+        //recupera el texto del buffer
+        this.mensajePendiente=cadena;
+        
+        
     }
 }
